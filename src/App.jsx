@@ -7,7 +7,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
 
 function App() {
-  const client = new QueryClient();
+  // qeury for GET
+  // mutation CREATE UPDATE DELETE
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: true,
+      },
+    },
+  });
+  console.log("render");
   return (
     <div className="App">
       <QueryClientProvider client={client}>

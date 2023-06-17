@@ -2,7 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 
 const Home = () => {
-  const { data, isLoading, isError } = useQuery(["kitty"], () => {
+  const {
+    data: kittyData,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery(["kitty"], () => {
     return Axios.get("https://excuser-three.vercel.app/v1/excuse/").then(
       (res) => {
         console.log(res);
@@ -20,9 +25,12 @@ const Home = () => {
   }
 
   return (
-    <h1>
-      This is a Homepage,<p>{data?.excuse}</p>{" "}
-    </h1>
+    <>
+      <h1>
+        This is a Homepage,<p>{kittyData?.excuse}</p>{" "}
+      </h1>
+      <button onClick={refetch}>Update data</button>
+    </>
   );
 };
 
